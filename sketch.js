@@ -4,9 +4,9 @@ let renderCounter=0;
 let curLayer = 0;
 
 // change these three lines as appropiate
-let sourceFile = "input_5.jpg";
-let maskFile   = "mask_5.png";
-let outputFile = "output_1.png";
+let sourceFile = "input_1.jpg";
+let maskFile   = "mask_1.png";
+let outputFile = "output_6.png";
 
 function preload() {
   sourceImg = loadImage(sourceFile);
@@ -46,7 +46,7 @@ function draw () {
             pix = sourceImg.get(i, j);
             pix[0] = map(30, 0, 100, pix[0], 255)
             pix[1] = map(30, 0, 100, pix[1], 255)
-            set(i, j, pix);
+            set(i, j-90, pix);
           }
           else {  
               let wave = sin(j*8);
@@ -71,7 +71,7 @@ function draw () {
             pix = sourceImg.get(i, j);
             pix[0] = map(60, 0, 100, pix[0], 255)
             pix[1] = map(60, 0, 100, pix[1], 255)
-            set(i+30, j, pix);
+            set(i, j-60, pix);
           }
           else {  
           //   let wave = sin(j*8);
@@ -97,7 +97,7 @@ function draw () {
             pix = sourceImg.get(i, j);
             pix[0] = map(90, 0, 100, pix[0], 255)
             pix[1] = map(90, 0, 100, pix[1], 255)
-            set(i+60, j, pix);
+            set(i, j-30, pix);
           }
           else {  
           //   let wave = sin(j*8);
@@ -123,7 +123,7 @@ function draw () {
             pix = sourceImg.get(i, j);
             pix[0] = map(0, 0, 100, pix[0], 255)
             pix[1] = map(0, 0, 100, pix[1], 255)
-            set(i+90, j, pix);
+            set(i, j, pix);
           }
           else {  
           //   let wave = sin(j*8);
