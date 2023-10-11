@@ -49,9 +49,10 @@ function draw () {
             set(i, j, pix);
           }
           else {  
-            // let wave = sin(j*8);
-            // let slip = map(wave, -1, 1, -OFFSET, OFFSET);
-            // pix = sourceImg.get(i+slip, j);
+              let wave = sin(j*8);
+            let slip = map(wave, -1, 1, -OFFSET, OFFSET);
+            pix = sourceImg.get(i+slip, j);
+          set(i, j, pix);
           }
 
         }
@@ -67,15 +68,68 @@ function draw () {
           colorMode(RGB);
           let mask = maskImg.get(i, j);
           if (mask[1] > 128) { 
-            // pix = sourceImg.get(i, j);
-            // pix[0] = map(30, 0, 100, pix[0], 255)
-            // pix[1] = map(30, 0, 100, pix[1], 255)
+            pix = sourceImg.get(i, j);
+            pix[0] = map(60, 0, 100, pix[0], 255)
+            pix[1] = map(60, 0, 100, pix[1], 255)
+            set(i+30, j, pix);
           }
           else {  
-            let wave = sin(j*8);
-            let slip = map(wave, -1, 1, -OFFSET, OFFSET);
-            pix = sourceImg.get(i+slip, j);
-            set(i, j, pix);
+          //   let wave = sin(j*8);
+          //   let slip = map(wave, -1, 1, -OFFSET, OFFSET);
+          //   pix = sourceImg.get(i+slip, j);
+          // set(i, j, pix);
+          }
+
+        }
+      }
+    }
+
+    else if (curLayer == 2) {
+
+      angleMode(DEGREES);
+      let num_lines_to_draw = 40;
+      // get one scanline
+      for(let j=renderCounter; j<renderCounter+num_lines_to_draw && j<Y_STOP; j++) {
+        for(let i=0; i<X_STOP; i++) {
+          colorMode(RGB);
+          let mask = maskImg.get(i, j);
+          if (mask[1] > 128) { 
+            pix = sourceImg.get(i, j);
+            pix[0] = map(90, 0, 100, pix[0], 255)
+            pix[1] = map(90, 0, 100, pix[1], 255)
+            set(i+60, j, pix);
+          }
+          else {  
+          //   let wave = sin(j*8);
+          //   let slip = map(wave, -1, 1, -OFFSET, OFFSET);
+          //   pix = sourceImg.get(i+slip, j);
+          // set(i, j, pix);
+          }
+
+        }
+      }
+    }
+
+    else {
+
+      angleMode(DEGREES);
+      let num_lines_to_draw = 40;
+      // get one scanline
+      for(let j=renderCounter; j<renderCounter+num_lines_to_draw && j<Y_STOP; j++) {
+        for(let i=0; i<X_STOP; i++) {
+          colorMode(RGB);
+          let mask = maskImg.get(i, j);
+          if (mask[1] > 128) { 
+            pix = sourceImg.get(i, j);
+            pix[0] = map(0, 0, 100, pix[0], 255)
+            pix[1] = map(0, 0, 100, pix[1], 255)
+            set(i+90, j, pix);
+          }
+          else {  
+          //   let wave = sin(j*8);
+          //   let slip = map(wave, -1, 1, -OFFSET, OFFSET);
+          //   pix = sourceImg.get(i+slip, j);
+          // set(i, j, pix);
           }
 
         }
@@ -88,6 +142,15 @@ function draw () {
     curLayer = 1;
     renderCounter = 0;
   }
+  if(curLayer == 1 && renderCounter > 1080) {
+    curLayer = 2;
+    renderCounter = 0;
+  }
+  if(curLayer == 2 && renderCounter > 1080) {
+    curLayer = 3;
+    renderCounter = 0;
+  }
+
   // print(renderCounter);
   if(renderCounter > Y_STOP) {
     console.log("Done!")
